@@ -1,15 +1,25 @@
 package sg.nus.iss.visa.ssf.day12workshop.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
+import sg.nus.iss.visa.ssf.day12workshop.model.Image;
+import sg.nus.iss.visa.ssf.day12workshop.service.RandomNumService;
 
 @Controller
 // @RequestMapping(path = "/api")
 public class RandomNumber {
+
+    //injecting dependency
+    @Autowired
+    RandomNumService service;
 
     @GetMapping("/home")
     public String landingPage() {
@@ -31,6 +41,18 @@ public class RandomNumber {
             model.addAttribute("errorMessage", errorMessage);
             return "home";
         }
+
+        //calling service method
+        List<Integer> randomNum = service.generateRandNumbers(number);
+
+        //populate image objects
+        List<Image> imageList = new ArrayList<>();
+
+        for(int randomNo : randomNum){
+            imageList.add(new Image(Integer.toString(randomNo), "/images/"+ Integer.toString(randomNo)+".png" ));
+        }
+
+        model.addAttribute(imageList);
 
         return "display";
 
