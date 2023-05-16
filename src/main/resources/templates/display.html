@@ -7,6 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    hi
+    <a href="/home">Back To Home</a>
+    <!--Check if imageList is not null-->
+    <h1>Your list of <label th:text="${imageList.size()}"></label> random numbers</h1>
+
+    <!--Iterating image list and loading each image-->
+    <div th:if="${not #lists.isEmpty(imageList)}">
+            <div th:each="image: ${imageList}">
+                <img width="200" th:src="@{${image.path}}"/>
+            </div>
+        </div>
+        
+        
+
+
+    </div>
 </body>
 </html>

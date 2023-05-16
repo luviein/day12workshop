@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import sg.nus.iss.visa.ssf.day12workshop.model.Image;
@@ -51,6 +52,8 @@ public class RandomNumber {
         for(int randomNo : randomNum){
             imageList.add(new Image(Integer.toString(randomNo), "/images/"+ Integer.toString(randomNo)+".png" ));
         }
+
+        System.out.println("image list: " + imageList);
 
         model.addAttribute(imageList);
 
